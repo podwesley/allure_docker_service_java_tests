@@ -1,7 +1,6 @@
 package com.allure.docker.actions;
 
 import com.allure.docker.annotation.Logger;
-import com.allure.docker.elements.GoogleSearchElements;
 import com.allure.docker.utils.LoggerManager;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.*;
@@ -16,12 +15,9 @@ import java.io.ByteArrayInputStream;
 @Logger(level = "DEBUG")
 public class SeleniumActions {
     private WebDriver driver;
-    private GoogleSearchElements googleSearchElements;
 
     public SeleniumActions(WebDriver driver) {
         this.driver = driver;
-        // Initialize Elements used by these actions
-        this.googleSearchElements = new GoogleSearchElements(driver);
     }
 
     /**
@@ -33,23 +29,6 @@ public class SeleniumActions {
         driver.get(url);
     }
 
-    /**
-     * Get the Google search box element.
-     * @return The search box WebElement.
-     */
-    public WebElement getGoogleSearchBox() {
-        LoggerManager.debug("Getting Google search box element via Elements");
-        return googleSearchElements.getSearchBox();
-    }
-
-    /**
-     * Get the Google search button element.
-     * @return The search button WebElement.
-     */
-    public WebElement getGoogleSearchButton() {
-        LoggerManager.debug("Getting Google search button element via Elements");
-        return googleSearchElements.getSearchButton();
-    }
 
     /**
      * Clear a text field and type into it.

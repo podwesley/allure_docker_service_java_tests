@@ -3,6 +3,7 @@ package com.allure.docker.steps;
 import com.allure.docker.actions.SeleniumActions;
 import com.allure.docker.annotation.Logger;
 import com.allure.docker.drivers.WebDriverFactory;
+import com.allure.docker.pages.GoogleSearchPage;
 import com.allure.docker.utils.LoggerManager;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -13,10 +14,12 @@ import org.openqa.selenium.WebElement;
 @Logger(level = "DEBUG")
 public class StepsDefinitions {
     private SeleniumActions seleniumActions;
+    private GoogleSearchPage googleSearchPage;
 
     public StepsDefinitions() {
         // Initialize the SeleniumActions with the WebDriver from WebDriverFactory
         seleniumActions = new SeleniumActions(WebDriverFactory.getInstance().getDriver());
+        googleSearchPage = new GoogleSearchPage(WebDriverFactory.getInstance().getDriver());
     }
 
     @Given("^Estou na página do Google$")
@@ -35,7 +38,7 @@ public class StepsDefinitions {
     @When("^Eu insiro \"([^\"]*)\" na página$")
     public void euInsiroNaPagina(String texto) {
         // Encontrar o campo de pesquisa do Google e inserir o texto
-        WebElement searchBox = seleniumActions.getGoogleSearchBox();
+        WebElement searchBox = googleSearchPage.getSearchBox();
         seleniumActions.clearAndType(searchBox, texto);
         seleniumActions.takeScreenshot("Texto inserido: " + texto);
     }
@@ -43,7 +46,7 @@ public class StepsDefinitions {
     @When("^Eu pesquiso por \"([^\"]*)\"$")
     public void euPesquisoPor(String termo) {
         // Encontrar o campo de pesquisa do Google, inserir o termo e pressionar Enter
-        WebElement searchBox = seleniumActions.getGoogleSearchBox();
+        WebElement searchBox = googleSearchPage.getSearchBox();
         seleniumActions.clearAndType(searchBox, termo);
         seleniumActions.pressEnter(searchBox);
         seleniumActions.takeScreenshot("Pesquisa por: " + termo);
@@ -52,7 +55,7 @@ public class StepsDefinitions {
     @When("^Eu clico no botão de pesquisa$")
     public void euClicoNoBotaoDePesquisa() {
         // Clicar no botão de pesquisa do Google
-        WebElement searchButton = seleniumActions.getGoogleSearchButton();
+        WebElement searchButton = googleSearchPage.getSearchButton();
         seleniumActions.click(searchButton);
         seleniumActions.takeScreenshot("Clique no botão de pesquisa");
     }
