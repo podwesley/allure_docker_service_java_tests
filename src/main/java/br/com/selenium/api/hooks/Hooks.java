@@ -1,8 +1,8 @@
-package com.allure.docker.hooks;
+package br.com.selenium.api.hooks;
 
-import com.allure.docker.annotation.Logger;
-import com.allure.docker.drivers.WebDriverFactory;
-import com.allure.docker.utils.LoggerManager;
+import br.com.selenium.api.annotation.Logger;
+import br.com.selenium.api.drivers.WebDriverFactory;
+import br.com.selenium.api.utils.LoggerManager;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;

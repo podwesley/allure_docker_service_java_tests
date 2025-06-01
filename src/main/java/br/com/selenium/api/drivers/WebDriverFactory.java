@@ -1,6 +1,6 @@
-package com.allure.docker.drivers;
+package br.com.selenium.api.drivers;
 
-import com.allure.docker.utils.LoggerManager;
+import br.com.selenium.api.utils.LoggerManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -75,27 +75,13 @@ public class WebDriverFactory {
      * Configures timeouts for the WebDriver
      */
     private void configureDriverTimeouts() {
-        // Define um tempo de espera implícito de 30 segundos para que o WebDriver aguarde elementos ficarem disponíveis
-        // antes de lançar uma exceção. Isso evita falhas quando elementos demoram para carregar na página.
+
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
-        // Define um tempo limite de 60 segundos para o carregamento completo da página.
-        // Isso evita timeouts em conexões lentas ou quando páginas são muito pesadas.
         driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
-
-        // Define um tempo limite de 30 segundos para a execução de scripts JavaScript assíncronos.
-        // Importante para páginas que dependem de JavaScript para renderizar conteúdo.
         driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
-
-        // Maximiza a janela do navegador para garantir que todos os elementos estejam visíveis.
-        // Isso ajuda a evitar problemas de elementos não clicáveis por estarem fora da área visível.
         driver.manage().window().maximize();
     }
     
-    /**
-     * Creates Chrome options based on the environment
-     * @return ChromeOptions configured for the current environment
-     */
     private ChromeOptions createChromeOptions() {
         ChromeOptions options = new ChromeOptions();
 
@@ -109,18 +95,18 @@ public class WebDriverFactory {
         options.addArguments("--disable-infobars");
 
         if (IS_DOCKER || !IS_WINDOWS) {
-            // Configurações específicas para Docker/Linux
+    
             LoggerManager.debug("Configurando para ambiente Docker/Linux");
             options.addArguments("--headless");
 
-            // Usar o caminho do Chrome no Docker se disponível
+
             String chromeBinary = System.getenv("CHROME_BIN");
             if (chromeBinary != null && !chromeBinary.isEmpty()) {
                 LoggerManager.debug("Usando Chrome binário em: " + chromeBinary);
                 options.setBinary(chromeBinary);
             }
         } else {
-            // Configurações específicas para Windows
+       
             LoggerManager.debug("Configurando para ambiente Windows");
             configureChromePathForWindows(options);
         }
@@ -128,12 +114,9 @@ public class WebDriverFactory {
         return options;
     }
     
-    /**
-     * Configures Chrome path for Windows environment
-     * @param options ChromeOptions to configure
-     */
+
     private void configureChromePathForWindows(ChromeOptions options) {
-        // Verificar se o caminho padrão do Chrome existe
+  
         File defaultChromePath = new File("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe");
         File defaultChromePath2 = new File("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe");
 
@@ -148,14 +131,8 @@ public class WebDriverFactory {
         }
     }
     
-    /**
-     * Handles errors during WebDriver setup
-     * @param e The exception that occurred
-     */
     private void handleWebDriverSetupError(Exception e) {
         LoggerManager.error("Erro ao configurar WebDriver: " + e.getMessage(), e);
-
-        // Tentar abordagem alternativa com configuração mais simples
         LoggerManager.info("Tentando configuração alternativa...");
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
@@ -165,9 +142,6 @@ public class WebDriverFactory {
         driver = new ChromeDriver(options);
     }
     
-    /**
-     * Quits the driver and resets the instance
-     */
     public synchronized void quitDriver() {
         if (driver != null) {
             driver.quit();

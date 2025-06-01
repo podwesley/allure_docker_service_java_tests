@@ -1,9 +1,9 @@
-package com.allure.docker.examples;
+package br.com.selenium.api.examples;
 
-import com.allure.docker.annotation.Database;
-import com.allure.docker.annotation.Logger;
-import com.allure.docker.utils.DatabaseManager;
-import com.allure.docker.utils.LoggerManager;
+import br.com.selenium.api.annotation.Database;
+import br.com.selenium.api.annotation.Logger;
+import br.com.selenium.api.database.DatabaseManager;
+import br.com.selenium.api.utils.LoggerManager;
 
 import java.sql.Connection;
 import java.sql.SQLException;

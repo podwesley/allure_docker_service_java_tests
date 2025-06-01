@@ -1,11 +1,11 @@
-package com.allure.docker.utils;
+package br.com.selenium.api.database;
 
-import com.allure.docker.annotation.Database;
-import com.allure.docker.annotation.Logger;
+import br.com.selenium.api.annotation.Database;
+import br.com.selenium.api.annotation.Logger;
+import br.com.selenium.api.utils.LoggerManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
-import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

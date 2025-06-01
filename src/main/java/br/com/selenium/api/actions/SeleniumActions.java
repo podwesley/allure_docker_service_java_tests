@@ -1,7 +1,7 @@
-package com.allure.docker.actions;
+package br.com.selenium.api.actions;
 
-import com.allure.docker.annotation.Logger;
-import com.allure.docker.utils.LoggerManager;
+import br.com.selenium.api.annotation.Logger;
+import br.com.selenium.api.utils.LoggerManager;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.*;
 
