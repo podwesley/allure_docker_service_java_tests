@@ -17,3 +17,8 @@ Feature: API Demo Tests
     Given I have an existing user ID
     When I send a request to delete the user
     Then the user should be deleted successfully
+
+  Scenario: Update existing user details via API
+    Given I have an existing user ID and updated user data
+    When I send a request to update the user's details
+    Then the user's details should be updated successfully
