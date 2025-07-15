@@ -247,5 +247,4 @@ public class DatabaseExampleTest {
             fail("Exception occurred: " + e.getMessage());
         }
     }
-
 }
